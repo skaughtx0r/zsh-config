@@ -4,6 +4,15 @@ export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
+export LANG="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
 POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
@@ -32,7 +41,7 @@ DEFAULT_USER=$(whoami)
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github colorize colored-man zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git github colorize colored-man-pages zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,12 +81,6 @@ local current_dir='${PWD/#$HOME/~}'
 # RPROMPT="%{$fg_bold[yellow]%} -- %*  %W -- %{$reset_color%}"
 
 
-#Uses vim for less
-VLESS=$(find /usr/share/vim -name 'less.sh')
-if [ ! -z $VLESS ]; then
-  alias less=$VLESS
-fi
-
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
@@ -93,7 +96,3 @@ PATH=$PATH:/opt/local/bin:/opt/local/sbin:/usr/texbin:$HOME/bin
 export PATH
 
 export NODE_PATH=/usr/lib/nodejs:/usr/lib/node_modules:/usr/share/javascript:$HOME/.npm-global/lib/node_modules
-
-export CATALINA_HOME=$HOME/Applications/NRLTileServer
-source $HOME/mocu_env_vars.sh
-source $HOME/python3/bin/activate
