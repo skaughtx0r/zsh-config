@@ -6,6 +6,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/p
 git clone https://github.com/bhilburn/powerlevel9k.git  $ZSH_CUSTOM/themes/powerlevel9k
 mkdir -p $HOME/.local/share/fonts
 curl -fLo "$HOME/.local/share/fonts/Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+fc-cache -f -v
+sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
 
 cd $(dirname "$0")
 DOTDIR="$(pwd)/"
