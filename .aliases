@@ -1,0 +1,60 @@
+#!/usr/env zsh
+
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+    # call valgrind with os x lion suppressions
+    alias valgrind='valgrind --suppressions=/Users/stharding/.valgrind/darwin11.supp'
+
+    # Show local and external ip addresses
+    alias ip="echo 'local ip(s): '; ipconfig getifaddr en0 ; ipconfig getifaddr en1 ; echo 'extern: ' ; dig +short myip.opendns.com @resolver1.opendns.com"
+
+    # Flush Directory Service cache
+    alias flush="dscacheutil -flushcache"
+
+    # prevent sleeping
+    alias noidle="pmset noidle"
+
+    # Show/hide hidden files in Finder
+    alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
+    alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
+
+    # open shorthand
+    alias o="open"
+    alias oo="open ."
+
+    # Textmate aliases
+    alias mm="mate ."
+    alias m="mate"
+
+    alias vlc="/Applications/VLC.app/Contents/MacOS/VLC -I rc"
+
+    alias ls="ls -G -F -h"
+
+    alias vnc="open -a /System/Library/CoreServices/Screen\ Sharing.app"
+
+    alias cursor="tput cnorm"
+else
+    alias ls="ls --color -F -h"
+    alias o="nautilus"
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+fi
+
+
+# command line speedtest
+alias speed="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
+
+# Limit ping to 5 pings
+alias ping="ping -c 5"
+
+# ls aliases
+alias ll="ls -l"
+alias la="ls -a"
+alias lla="ls -al"
+alias l="ls"
+alias sl="ls" # because I am always doing this ...
+
+alias mkae="make"
+alias amke="make"
+alias maek="make"
+
+alias nbl="npm run build && cd dist && npm link --prod && cd .."

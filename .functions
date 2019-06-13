@@ -1,0 +1,51 @@
+# launch a webserver that serves the current directory
+# with the default port 8080 or whatever port is specified
+# as an optional argument
+serve()
+{
+  python -m SimpleHTTPServer ${1:-8080}
+}
+
+# add my RSA public key to the authorized_keys file on a remote machine
+key()
+{
+  #printf "argc: $#\n"
+  if [ -z $1 ]; then
+    printf "USAGE: key HOST\n"
+    printf "  where HOST is the remote host where you want to put your public key\n"
+  else
+    cat ~/.ssh/id_rsa.pub \
+      | ssh $1 "mkdir .ssh 2>/dev/null; cat >> .ssh/authorized_keys"
+    printf "put public key in .ssh/authorized_keys on $1\n"
+  fi
+}
+
+# returns a URL which contains the file given as an arg
+sprunge() # Takes a file and returns a url which has the contents of the file.
+{         # The url is copied to the system clipboard and printed to stdout
+  if [ -z $1 ]; then
+    printf "USAGE:\n"
+    printf "  sprunge FILE\n"
+    printf "  the sprunge url will be in the system clipboard\n"
+  else
+    res=$(cat $1 | curl -F 'sprunge=<-' http://sprunge.us)
+    echo $res\?$(ext $1) | tee >(pbcopy)
+  fi
+}
+
+tunnel () {
+  if [[ -z $1 || -z $2 ]]
+  then
+    echo "USAGE: $0 <local-port> <host> [remote-port]"
+    echo "       if remote-port is not supplied, the"
+    echo "       remote-port will be set to local-port"
+  else
+    LOCALPORT=$1
+    HOST=$2
+    REMOTEPORT=$3
+    [ -z $REMOTEPORT ] && REMOTEPORT=$LOCALPORT
+    ssh -fNL${LOCALPORT}:localhost:${REMOTEPORT} ${HOST}
+  fi
+}
+
+
